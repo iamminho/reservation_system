@@ -32,7 +32,10 @@ body {
   padding-left: 20px;
   padding-right: 20px;
 }
-
+.MyHeader {
+  text-align: center;
+  font-size: 35px;
+}
 /* MyButton */
 .MyButton {
   width: 80px;

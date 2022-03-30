@@ -1,9 +1,7 @@
-const MyHeader = () => {
+const MyHeader = ({ companyName }) => {
   return (
-    <header>
-      <div></div>
-      <div></div>
-      <div></div>
+    <header className="MyHeader">
+      <h2>{companyName}</h2>
     </header>
   );
 };

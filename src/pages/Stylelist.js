@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-const Stylists = () => {
+const Stylelist = () => {
   const { id } = useParams();
   console.log(id);
   return (
@@ -10,4 +10,4 @@ const Stylists = () => {
   );
 };
 
-export default Stylists;
+export default Stylelist;
