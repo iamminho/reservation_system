@@ -1,11 +1,12 @@
 import "./App.css";
-import { useReducer } from "react";
+import React, { useReducer, useState, useRef } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // import RouteTest from "./components/RouteTest";
 
-import AddStylelist from "./pages/AddStylelist";
-import Stylelist from "./pages/Stylelist";
+//Pages
+import New from "./pages/New";
+import Stylist from "./pages/Stylist";
 import Personalinfo from "./pages/Personalinfo";
 import Time from "./pages/Time";
 import Home from "./pages/Home";
@@ -13,32 +14,126 @@ import Home from "./pages/Home";
 //Components
 // import MyButton from "./components/MyButtons";
 import MyHeader from "./components/MyHeader";
+import StylistItem from "./components/StylistItem";
+
+const reducer = (state,action) => {
+  let newState = [];
+  switch(action.type){
+    case 'INIT':{
+      return action.data;
+    }
+    case 'CREATE':{
+      newState = [...action.data, ...state];
+      break; // break걸지 않으면 자동으로 default가 실행된다.
+    }
+    case 'REMOVE':{
+      newState = state.filter((it)=> it.id !== action.targetId);
+      break;
+    }
+    case 'EDIT': {
+      newState = state.map((it) =>
+        it.id === action.data.id ? { ...action.data } : it
+      );
+      break;
+    }
+    default:
+      return state;
+  }
+  return newState;   
+};
+
+export const StylistStateContext = React.createContext();
+export const StylistDispatchContext = React.createContext();
+
+const dummyData = [
+  {
+    id: 1,
+    author: "사람1",
+    content: "내용1",
+    picture: "",
+  },
+  {
+    id: 2,
+    author: "사람2",
+    content: "내용2",
+    picture: "",
+  },
+  {
+    id: 3,
+    author: "사람3",
+    content: "내용3",
+    picture: "",
+  },
+  {
+    id: 4,
+    author: "사람4",
+    content: "내용4",
+    picture: "",
+  },
+  {
+    id: 5,
+    author: "사람5",
+    content: "내용5",
+    picture: "",
+  },
+]
 
 function App() {
+  const [data,dispatch] = useReducer(reducer,dummyData);
+  
+  const dataId = useRef(0);
+ 
+  // CREATE
+  const onCreate = (author, content, picture) => {
+    dispatch({type : "CREATE",
+     data: {
+      id: dataId.current,
+      author,
+      content,
+      picture,
+    }})
+    dataId.current += 1;
+  };
+  // REMOVE
+  const onRemove = (targetId) => {
+    dispatch({type : "REMOVE", targetId});
+  }
+  // EDIT
+  const onEdit = (targetId, author, content, picture) => {
+    dispatch({
+      type: "EDIT",
+      data: {
+        id: targetId,
+        author,
+        content,
+        picture,
+      },
+    });
+  };
+ 
   return (
-    <Router>
-      <div className="App">
-        <MyHeader companyName={"ramibeauty"} />
-        {/* 라우트 안에 있는 요소들만 변경된다
-        <MyButton
-          text={"버튼"}
-          onClick={() => alert("버튼클릭")}
-          type={"positive"}
-        />
-        <MyButton
-          text={"예약하기"}
-          onClick={() => alert("예약이 완료되었습니다.")}
-        /> */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Stylelist" element={<Stylelist />} />
-          <Route path="/AddStylelist" element={<AddStylelist />} />
-          <Route path="/Personalinfo" element={<Personalinfo />} />
-          <Route path="/Time" element={<Time />} />
-        </Routes>
-        {/* <RouteTest /> */}
-      </div>
-    </Router>
+    <StylistStateContext.Provider value={data}>
+      <StylistDispatchContext.Provider 
+        value={{ 
+          onCreate, 
+          onRemove, 
+          onEdit 
+        }}
+      >
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/Stylist" />
+              <Route path="/New" element={<New />} />
+              <Route path="/Personalinfo" element={<Personalinfo />} />
+              <Route path="/Time" element={<Time />} />
+            </Routes>
+            {/* <RouteTest /> */}
+          </div>
+        </Router>
+      </StylistDispatchContext.Provider>
+    </StylistStateContext.Provider>
   );
 }
 

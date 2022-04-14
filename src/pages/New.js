@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 // import Alert from "@mui/material/Alert";
 
-const AddStylelist = () => {
+const New = ({onCreate}) => {
   const authorInput = useRef();
   const contentInput = useRef();
 
@@ -19,11 +19,8 @@ const AddStylelist = () => {
 
   const [authorError, setAuthorError] = useState(false);
   const [contentError, setContentError] = useState(false);
-  const [authHelperText, setAuthHelperText] = useState(
-    "스타일리스트의 이름을 입력해 주세요"
-  );
-  const [cntHelperText, setCntHelperText] =
-    useState("스타일리스트의 설명을 적어주세요");
+  const [authHelperText, setAuthHelperText] = useState("스타일리스트의 이름을 입력해 주세요");
+  const [cntHelperText, setCntHelperText] = useState("스타일리스트의 설명을 적어주세요");
 
   const handleChangeState = (e) => {
     setState({
@@ -54,7 +51,9 @@ const AddStylelist = () => {
 
     if (state.author.length >= 1 && state.content.length >= 5) {
       alert("저장이 완료되었습니다.");
+      
     }
+    onCreate(state.author, state.content, state.picture);
   };
 
   return (
@@ -105,19 +104,6 @@ const AddStylelist = () => {
         />
       </div>
 
-      {/* <div>
-        <TextareaAutosize
-          maxRows={4}
-          aria-label="maximum height"
-          placeholder="스타일리스트에대해 설명해 주세요"
-          style={{ width: 600, height: 200 }}
-          name="content"
-          value={state.content}
-          ref={contentInput}
-          onChange={handleChangeState}
-        />
-      </div> */}
-
       <Button variant="contained" onClick={handleSubmit}>
         저장하기
       </Button>
@@ -125,4 +111,4 @@ const AddStylelist = () => {
   );
 };
 
-export default AddStylelist;
+export default New;
