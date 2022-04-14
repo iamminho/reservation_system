@@ -1,18 +1,21 @@
-const MyButton = ({ text, type, onClick }) => {
-  // type이 positive면 type=positive이고 나머지는 type=default로
-  const btnType = ["positive"].includes(type) ? type : "default";
-  return (
-    <button
-      className={["MyButton", `MyButton_${btnType}`].join(" ")}
-      onClick={onClick}
-    >
-      {text}
-    </button>
-  );
+import Button from '@mui/material/Button';
+
+const MyButton = ({text, type, onClick}) => {
+    const btnType = ['success', 'error'].includes(type)? type:'secondary';
+    // type = secondary(nomal), success, error
+    return (
+        <Button  
+            className={['MyButton',`Mybutton_${btnType}`].join(" ")}
+            onClick = {onClick}
+            variant = 'outlined'
+            color={btnType}       
+        >
+        {text}
+        </Button>
+    );
 };
 
 MyButton.defaultProps = {
-  type: "default",
+    type: "secondary"
 };
-
 export default MyButton;

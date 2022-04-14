@@ -1,11 +1,15 @@
+import StylistItem from './StylistItem';
 const StylistList = ({stylistList}) => {
     return (
         <div>
             {stylistList.map((it)=>(
-                <div key={it.id}>{it.content}</div>
+                <StylistItem key={it.id} {...it}/>
             ))}
         </div>
     );
 };
 
+StylistList.defaultProps = {
+    stylistList: [],
+};
 export default StylistList;

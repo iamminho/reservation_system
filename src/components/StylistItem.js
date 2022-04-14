@@ -10,18 +10,18 @@ import Typography from "@material-ui/core/Typography";
 import { ClassNames } from '@emotion/react';
 
 const StylistItem = ({id, author, content, picture}) => {
-  
+
   return (
     <div className = "StylistItem" >
         <Card>
         <CardActionArea>
-            <CardMedia
-            component={picture}
+            {/* <CardMedia
+            component="img"
             alt="Contemplative Reptile"
-            height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
+            height="100"
+            image={picture}
             title="Contemplative Reptile"
-            />
+            /> */}
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
                 {author}

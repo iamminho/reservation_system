@@ -1,22 +1,26 @@
-import { useRef, useState } from "react";
-// import { useParams } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
+import { StylistDispatchContext } from '../App';
+ 
+
+//mui
 import Button from "@mui/material/Button";
-// import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
-// import Alert from "@mui/material/Alert";
 
-const New = ({onCreate}) => {
-  const authorInput = useRef();
-  const contentInput = useRef();
 
+const New = () => {
+  const navigate = useNavigate();
+  
   const [state, setState] = useState({
     author: "",
     content: "",
     picture: "",
   });
+  
 
+  const {onCreate} = useContext(StylistDispatchContext);
   const [authorError, setAuthorError] = useState(false);
   const [contentError, setContentError] = useState(false);
   const [authHelperText, setAuthHelperText] = useState("스타일리스트의 이름을 입력해 주세요");
@@ -30,6 +34,7 @@ const New = ({onCreate}) => {
     });
   };
 
+  
   const handleSubmit = () => {
     if (state.author.length === 0) {
       setAuthorError(true);
@@ -51,9 +56,10 @@ const New = ({onCreate}) => {
 
     if (state.author.length >= 1 && state.content.length >= 5) {
       alert("저장이 완료되었습니다.");
-      
     }
+    
     onCreate(state.author, state.content, state.picture);
+    navigate('/',{replace: true});
   };
 
   return (

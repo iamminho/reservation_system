@@ -10,6 +10,7 @@ import Stylist from "./pages/Stylist";
 import Personalinfo from "./pages/Personalinfo";
 import Time from "./pages/Time";
 import Home from "./pages/Home";
+import Administrator from './pages/Administrator';
 
 //Components
 // import MyButton from "./components/MyButtons";
@@ -23,7 +24,7 @@ const reducer = (state,action) => {
       return action.data;
     }
     case 'CREATE':{
-      newState = [...action.data, ...state];
+      newState = [action.data, ...state]; 
       break; // break걸지 않으면 자동으로 default가 실행된다.
     }
     case 'REMOVE':{
@@ -50,39 +51,38 @@ const dummyData = [
     id: 1,
     author: "사람1",
     content: "내용1",
-    picture: "",
+    picture: <img src={process.env.PUBLIC_URL + `assets/emotion1.png`} alt="" />,
   },
   {
     id: 2,
     author: "사람2",
     content: "내용2",
-    picture: "",
+    picture: <img src={process.env.PUBLIC_URL + `assets/emotion2.png`} alt="" />,
   },
   {
     id: 3,
     author: "사람3",
     content: "내용3",
-    picture: "",
+    picture: <img src={process.env.PUBLIC_URL + `assets/emotion3.png`} alt="" />,
   },
   {
     id: 4,
     author: "사람4",
     content: "내용4",
-    picture: "",
+    picture: <img src={process.env.PUBLIC_URL + `assets/emotion4.png`} alt="" />,
   },
   {
     id: 5,
     author: "사람5",
     content: "내용5",
-    picture: "",
+    picture: <img src={process.env.PUBLIC_URL + `assets/emotion5.png`} alt="" />,
   },
 ]
 
 function App() {
   const [data,dispatch] = useReducer(reducer,dummyData);
-  
   const dataId = useRef(0);
- 
+  
   // CREATE
   const onCreate = (author, content, picture) => {
     dispatch({type : "CREATE",
@@ -92,7 +92,7 @@ function App() {
       content,
       picture,
     }})
-    dataId.current += 1;
+    dataId.current += 1;    
   };
   // REMOVE
   const onRemove = (targetId) => {
@@ -128,6 +128,7 @@ function App() {
               <Route path="/New" element={<New />} />
               <Route path="/Personalinfo" element={<Personalinfo />} />
               <Route path="/Time" element={<Time />} />
+              <Route path="/Administrator" element={<Administrator />} />
             </Routes>
             {/* <RouteTest /> */}
           </div>
