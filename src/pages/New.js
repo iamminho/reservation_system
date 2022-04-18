@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import { StylistDispatchContext } from '../App';
@@ -10,21 +10,36 @@ import TextField from "@mui/material/TextField";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 
 
-const New = () => {
+const New = ({isEdit,originData}) => {
   const navigate = useNavigate();
-  
+
+  // const[author,setAuthor] = useState("");
+  // const[content,setContent] = useState("");
+  // const[picture,setPicture] = useState("");
+
   const [state, setState] = useState({
     author: "",
     content: "",
     picture: "",
   });
   
+  console.log(originData.picture);
 
   const {onCreate} = useContext(StylistDispatchContext);
   const [authorError, setAuthorError] = useState(false);
   const [contentError, setContentError] = useState(false);
   const [authHelperText, setAuthHelperText] = useState("스타일리스트의 이름을 입력해 주세요");
   const [cntHelperText, setCntHelperText] = useState("스타일리스트의 설명을 적어주세요");
+
+  useEffect(() => {
+    if(isEdit){
+      setState({
+        author: originData.author,
+        content: originData.content,        
+      });             
+    }
+  },[isEdit,originData])
+  
 
   const handleChangeState = (e) => {
     setState({

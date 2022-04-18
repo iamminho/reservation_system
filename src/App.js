@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import RouteTest from "./components/RouteTest";
 
 //Pages
+import Edit from "./pages/Edit";
 import New from "./pages/New";
 import Stylist from "./pages/Stylist";
 import Personalinfo from "./pages/Personalinfo";
@@ -126,6 +127,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/Stylist" />
               <Route path="/New" element={<New />} />
+              <Route path="/Edit/:id" element={<Edit />} />
               <Route path="/Personalinfo" element={<Personalinfo />} />
               <Route path="/Time" element={<Time />} />
               <Route path="/Administrator" element={<Administrator />} />
