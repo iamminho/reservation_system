@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-
 import { StylistDispatchContext } from '../App';
  
 
@@ -8,7 +7,10 @@ import { StylistDispatchContext } from '../App';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
+import { LineAxisOutlined } from '@mui/icons-material';
 
+//component
+import MyHeader from '../components/MyHeader';
 
 const New = ({isEdit,originData}) => {
   const navigate = useNavigate();
@@ -19,13 +21,14 @@ const New = ({isEdit,originData}) => {
 
   const [state, setState] = useState({
     author: "",
-    content: "",
-    picture: "",
+    content: "",    
   });
-  
-  console.log(originData.picture);
 
-  const {onCreate} = useContext(StylistDispatchContext);
+  
+  
+  
+
+  const {onEdit, onCreate} = useContext(StylistDispatchContext);
   const [authorError, setAuthorError] = useState(false);
   const [contentError, setContentError] = useState(false);
   const [authHelperText, setAuthHelperText] = useState("스타일리스트의 이름을 입력해 주세요");
@@ -40,7 +43,6 @@ const New = ({isEdit,originData}) => {
     }
   },[isEdit,originData])
   
-
   const handleChangeState = (e) => {
     setState({
       ...state,
@@ -70,29 +72,25 @@ const New = ({isEdit,originData}) => {
     }
 
     if (state.author.length >= 1 && state.content.length >= 5) {
-      alert("저장이 완료되었습니다.");
+      if(window.confirm(isEdit ? "수정하시겠습니까?" : "저장하시겠습니까?")){
+        if(!isEdit){
+          onCreate(state.author, state.content);
+        }else{
+          onEdit(originData.id, state.author, state.content);
+        }
+      }
     }
     
-    onCreate(state.author, state.content, state.picture);
+    
     navigate('/',{replace: true});
   };
 
   return (
     <div className="Addstylelist">
-      <h1>Addstylelist</h1>
-      <p>이곳은 스타일리스트 생성 페이지 입니다.</p>
+      
+      <MyHeader headText={isEdit ? "수정" : "입력"} />
 
-      <div>
-        <input
-          type="file"
-          className="faceImgInput"
-          accept="image/*"
-          name="picture"
-          value={state.picture}
-          onChange={handleChangeState}
-        />
-      </div>
-
+      
       <div>
         <TextField
           autoFocus

@@ -1,7 +1,8 @@
-const MyHeader = ({ companyName }) => {
+const MyHeader = ({ headText }) => {
   return (
     <header className="MyHeader">
-      <h2>{companyName}</h2>
+      <h4>{headText}페이지</h4>
+      <p>이곳은 {headText}페이지입니다.</p>
     </header>
   );
 };

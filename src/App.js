@@ -85,13 +85,12 @@ function App() {
   const dataId = useRef(0);
   
   // CREATE
-  const onCreate = (author, content, picture) => {
+  const onCreate = (author, content) => {
     dispatch({type : "CREATE",
      data: {
       id: dataId.current,
       author,
-      content,
-      picture,
+      content,      
     }})
     dataId.current += 1;    
   };
@@ -100,14 +99,13 @@ function App() {
     dispatch({type : "REMOVE", targetId});
   }
   // EDIT
-  const onEdit = (targetId, author, content, picture) => {
+  const onEdit = (targetId, author, content) => {
     dispatch({
       type: "EDIT",
       data: {
         id: targetId,
         author,
-        content,
-        picture,
+        content,        
       },
     });
   };
