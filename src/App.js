@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 //Pages
 import Edit from "./pages/Edit";
 import New from "./pages/New";
+import Select from "./pages/Select";
+import Reservation from "./pages/Reservation"
 import Stylist from "./pages/Stylist";
 import Personalinfo from "./pages/Personalinfo";
 import Time from "./pages/Time";
@@ -126,6 +128,8 @@ function App() {
               <Route path="/Stylist" />
               <Route path="/New" element={<New />} />
               <Route path="/Edit/:id" element={<Edit />} />
+              <Route path="/Select" element={<Select />} />
+              <Route path="/Reservation/:id" element={<Reservation />} />
               <Route path="/Personalinfo" element={<Personalinfo />} />
               <Route path="/Time" element={<Time />} />
               <Route path="/Administrator" element={<Administrator />} />

@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 
-const StylistItem = ({id, author, content, picture}) => {
+const StylistItem = ({id, author, content, picture, isSelect}) => {
     const navigate = useNavigate();
   return (
     <div className="StylistItem">
@@ -32,14 +32,14 @@ const StylistItem = ({id, author, content, picture}) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button
+          <Button                       
             size="small"
             color="primary"
-            onClick={() => {
-              navigate(`Edit/${id}`);
+            onClick={(isSelect) => {
+              isSelect ? navigate(`Reservation/${id}`) : navigate(`Edit/${id}`);              
             }}
           >
-            수정하기
+            {(isSelect) ? "예약하기" : "수정하기"}
           </Button>
 
           <Button size="small" color="primary">
