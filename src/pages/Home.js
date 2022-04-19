@@ -6,8 +6,7 @@ import MyButton from '../components/MyButtons';
 import StylistList from '../components/StylistList';
 import { render } from '@testing-library/react';
 
-const Home = ({isSelect}) => {
-  console.log(isSelect);
+const Home = ({isSelect}) => {  
   const navigate = useNavigate();
   const stylistList = useContext(StylistStateContext);
   

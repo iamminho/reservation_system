@@ -129,7 +129,7 @@ function App() {
               <Route path="/New" element={<New />} />
               <Route path="/Edit/:id" element={<Edit />} />
               <Route path="/Select" element={<Select />} />
-              <Route path="/Reservation/:id" element={<Reservation />} />
+              <Route path="/Select/Reservation/:id" element={<Reservation />} />
               <Route path="/Personalinfo" element={<Personalinfo />} />
               <Route path="/Time" element={<Time />} />
               <Route path="/Administrator" element={<Administrator />} />

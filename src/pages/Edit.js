@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { StylistStateContext } from "../App";
 
 import New from './New';
+
 const Edit = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -19,6 +20,7 @@ const Edit = () => {
         if(targetStylist){
           setOriginData(targetStylist);
         }else{
+          alert("존재하지 않는 페이지 입니다.")
           navigate('/',{replace: true});
         }      
       }
