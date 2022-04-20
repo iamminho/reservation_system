@@ -14,6 +14,7 @@ import Personalinfo from "./pages/Personalinfo";
 import Time from "./pages/Time";
 import Home from "./pages/Home";
 import Administrator from './pages/Administrator';
+import Customer from './pages/Customer';
 
 //Components
 // import MyButton from "./components/MyButtons";
@@ -130,6 +131,7 @@ function App() {
               <Route path="/Edit/:id" element={<Edit />} />
               <Route path="/Select" element={<Select />} />
               <Route path="/Select/Reservation/:id" element={<Reservation />} />
+              <Route path="/Customer" element={<Customer />} />
               <Route path="/Personalinfo" element={<Personalinfo />} />
               <Route path="/Time" element={<Time />} />
               <Route path="/Administrator" element={<Administrator />} />
