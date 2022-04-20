@@ -20,15 +20,16 @@ const Reservation = () => {
 
     const [data, setData] = useState();
     const [phoneNumber, setphoneNumber] = useState();
-    const [getDate, setDate] = useState();      
-                
+    const [getDate, setDate] = useState();
+    const [customerName, setCustomerName] = useState();      
+    console.log(customerName);                
     const getPhoneNumber = (number) => {
       setphoneNumber(number);
     }
     const getReservationDay = (date) => {
       setDate(date);
     }        
-    console.log(getDate);                  
+                   
     useEffect(()=> {        
         if(stylistList.length >= 1){
             const targetStylist = stylistList.find(
@@ -43,6 +44,10 @@ const Reservation = () => {
         }                
     },[id,stylistList])
     
+    const handleChange = (e) => {
+      setCustomerName(e.target.value);
+    }
+    
     return (
       <div>
         <GetInformation.Provider
@@ -52,7 +57,12 @@ const Reservation = () => {
           }}
         >
           {id}
-          <TextField id="outlined-basic" label="name" variant="outlined" />
+          <TextField
+            id="outlined-basic"
+            label="name"
+            variant="outlined"
+            onChange={handleChange}
+          />
           <PhoneNumber />
           <DatePick />
           <MyButton text={"예약하기"} />
