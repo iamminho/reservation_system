@@ -1,5 +1,9 @@
 import { useContext } from 'react';
 
+//useContext
+import {GetInformation} from '../pages/Reservation';
+
+//mui
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { IMaskInput } from 'react-imask';
@@ -9,8 +13,6 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
-
-import {GetInformation} from '../pages/Reservation';
 
 const TextMaskCustom = React.forwardRef(function TextMaskCustom(props, ref) {
   const { onChange, ...other } = props;
@@ -34,6 +36,7 @@ TextMaskCustom.propTypes = {
 };
 
 export default function FormattedInputs() {
+
   const { getPhoneNumber, getReservationDay } = useContext(GetInformation);  
   
   const [values, setValues] = React.useState({
@@ -50,12 +53,8 @@ export default function FormattedInputs() {
 
   return (
     <Box
-      sx={{
-        '& > :not(style)': {
-          m: 1,
-        },
-      }}
-    >
+      sx={{'& > :not(style)': {m: 1,},}}>  
+
       <FormControl variant="standard">
         <InputLabel htmlFor="formatted-text-mask-input">phone number</InputLabel>
         <Input          

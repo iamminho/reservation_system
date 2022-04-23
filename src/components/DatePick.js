@@ -18,11 +18,6 @@ const DatePick = () => {
     const [value, setValue] = React.useState(new Date());
 
     const { getPhoneNumber, getReservationDay } = useContext(GetInformation);
-
-    // const handleChange = (e, newValue) => {
-    //   setValue(newValue);      
-    //   getReservationDay(value);
-    // }
         
     return (
       <div>

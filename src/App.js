@@ -113,13 +113,26 @@ function App() {
     });
   };
  
+  const [info, setInfo] = useState();
+  const infoId = useRef(0);
+
+  const customerCreate = (data, phoneNumber, getDate, customerName) => {
+    setInfo([data, phoneNumber, getDate, customerName]);
+    infoId.current += 1;
+  }
+  console.log(info);
+
+
+
+  
   return (
     <StylistStateContext.Provider value={data}>
       <StylistDispatchContext.Provider 
         value={{ 
           onCreate, 
           onRemove, 
-          onEdit 
+          onEdit,
+          customerCreate,          
         }}
       >
         <Router>

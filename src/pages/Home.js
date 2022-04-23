@@ -9,6 +9,7 @@ import { render } from '@testing-library/react';
 const Home = ({isSelect}) => {  
   const navigate = useNavigate();
   const stylistList = useContext(StylistStateContext);
+
   
   if(isSelect) {
     return (
@@ -20,7 +21,7 @@ const Home = ({isSelect}) => {
           }}
         />            
         <h1>select</h1>
-        <StylistList stylistList={stylistList} isSelect={isSelect}/>
+        <StylistList stylistList={stylistList} isSelect={isSelect} />
       </div>
     );
   }else{
