@@ -39,7 +39,7 @@ const StylistItem = ({id, author, content, isSelect }) => {
             color="primary"
             onClick={() => {
               if(isSelect){
-                navigate(`Reservation/${id}`);                
+                navigate(`/CustomerInfo/Reservation/${id}`);                
               }else navigate(`Edit/${id}`)                            
             }}
           >

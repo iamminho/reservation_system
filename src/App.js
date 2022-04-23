@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useReducer, useState, useRef } from "react";
+import React, { useReducer, useState, useRef, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // import RouteTest from "./components/RouteTest";
@@ -15,6 +15,7 @@ import Time from "./pages/Time";
 import Home from "./pages/Home";
 import Administrator from './pages/Administrator';
 import Customer from './pages/Customer';
+import CustomerInfo from './CustomerInfo';
 
 //Components
 // import MyButton from "./components/MyButtons";
@@ -44,6 +45,7 @@ const reducer = (state,action) => {
     default:
       return state;
   }
+  localStorage.setItem("stylist", JSON.stringify(newState));
   return newState;   
 };
 
@@ -51,42 +53,22 @@ export const StylistStateContext = React.createContext();
 export const StylistDispatchContext = React.createContext();
 export const CustomerStateContext = React.createContext();
 
-const dummyData = [
-  {
-    id: 1,
-    author: "사람1",
-    content: "내용1",
-    picture: <img src={process.env.PUBLIC_URL + `assets/emotion1.png`} alt="" />,
-  },
-  {
-    id: 2,
-    author: "사람2",
-    content: "내용2",
-    picture: <img src={process.env.PUBLIC_URL + `assets/emotion2.png`} alt="" />,
-  },
-  {
-    id: 3,
-    author: "사람3",
-    content: "내용3",
-    picture: <img src={process.env.PUBLIC_URL + `assets/emotion3.png`} alt="" />,
-  },
-  {
-    id: 4,
-    author: "사람4",
-    content: "내용4",
-    picture: <img src={process.env.PUBLIC_URL + `assets/emotion4.png`} alt="" />,
-  },
-  {
-    id: 5,
-    author: "사람5",
-    content: "내용5",
-    picture: <img src={process.env.PUBLIC_URL + `assets/emotion5.png`} alt="" />,
-  },
-]
+
 
 function App() {
-  const [data,dispatch] = useReducer(reducer,dummyData);
+  const [data,dispatch] = useReducer(reducer,[]);
   const dataId = useRef(0);
+
+  useEffect(() => {
+    const localData = localStorage.getItem("stylist");
+    if(localData) {
+      const stylelistList = JSON.parse(localData).sort(
+        (a, b) => parseInt(b.id) - parseInt(a.id)
+      );
+      dataId.current = parseInt(stylelistList[0].id) + 1;
+      dispatch({type:"INIT", data:stylelistList});
+    }
+  },[]);
   
   // CREATE
   const onCreate = (author, content) => {
@@ -153,13 +135,14 @@ function App() {
                 <Route path="/Edit/:id" element={<Edit />} />
                 <Route path="/Select" element={<Select />} />
                 <Route
-                  path="/Select/Reservation/:id"
+                  path="/Reservation/:id"
                   element={<Reservation />}
                 />
                 <Route path="/Customer" element={<Customer />} />
                 <Route path="/Personalinfo" element={<Personalinfo />} />
                 <Route path="/Time" element={<Time />} />
                 <Route path="/Administrator" element={<Administrator />} />
+                <Route path="/CustomerInfo/*" element={<CustomerInfo />} />
               </Routes>
               {/* <RouteTest /> */}
             </div>
