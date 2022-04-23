@@ -59,7 +59,7 @@ function App() {
   const [data,dispatch] = useReducer(reducer,[]);
   const dataId = useRef(0);
 
-  useEffect(() => {
+  useEffect(() => {    
     const localData = localStorage.getItem("stylist");
     if(localData) {
       const stylelistList = JSON.parse(localData).sort(
@@ -96,20 +96,20 @@ function App() {
     });
   };
  
-  const [info, setInfo] = useState([]);
-  const infoId = useRef(0);
+  // const [info, setInfo] = useState([]);
+  // const infoId = useRef(0);
 
-  const customerCreate = (data, phoneNumber, getDate, customerName) => {    
-    const newInfo = {
-      id: infoId.current,
-      data,
-      phoneNumber,
-      getDate,
-      customerName
-    }
-    infoId.current += 1;
-    setInfo([newInfo, ...info]);    
-  };
+  // const customerCreate = (data, phoneNumber, getDate, customerName) => {    
+  //   const newInfo = {
+  //     id: infoId.current,
+  //     data,
+  //     phoneNumber,
+  //     getDate,
+  //     customerName
+  //   }
+  //   infoId.current += 1;
+  //   setInfo([newInfo, ...info]);    
+  // };
  
 
 
@@ -117,13 +117,12 @@ function App() {
   
   return (
     <StylistStateContext.Provider value={data}>
-      <CustomerStateContext.Provider value={info}>
+      
         <StylistDispatchContext.Provider
           value={{
             onCreate,
             onRemove,
-            onEdit,
-            customerCreate,
+            onEdit,            
           }}
         >
           <Router>
@@ -134,11 +133,11 @@ function App() {
                 <Route path="/New" element={<New />} />
                 <Route path="/Edit/:id" element={<Edit />} />
                 <Route path="/Select" element={<Select />} />
-                <Route
+                {/* <Route
                   path="/Reservation/:id"
                   element={<Reservation />}
-                />
-                <Route path="/Customer" element={<Customer />} />
+                /> */}
+                {/* <Route path="/Customer" element={<Customer />} /> */}
                 <Route path="/Personalinfo" element={<Personalinfo />} />
                 <Route path="/Time" element={<Time />} />
                 <Route path="/Administrator" element={<Administrator />} />
@@ -147,8 +146,7 @@ function App() {
               {/* <RouteTest /> */}
             </div>
           </Router>
-        </StylistDispatchContext.Provider>
-      </CustomerStateContext.Provider>
+        </StylistDispatchContext.Provider>      
     </StylistStateContext.Provider>
   );
 }

@@ -1,8 +1,8 @@
 import ReservationItem from './ReservationItem';
-const ReservationList = ({CustomerInfo}) => {    
+const ReservationList = ({info}) => {          
     return (
-        <div>
-            {CustomerInfo.map((it) => (
+        <div>            
+            {info.map((it) => (
                 <ReservationItem key={it.id} {...it}/>
             ))}            
         </div>

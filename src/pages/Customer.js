@@ -1,13 +1,16 @@
 import { useContext } from "react";
 import { CustomerStateContext } from "../App";
 import ReservationList from "../components/ReservationList";
-const Customer = () => {
-  const CustomerInfo = useContext(CustomerStateContext);
+import {CustomerInfoContext} from "../CustomerInfo";
+const Customer = ({yoga}) => {  
+  const info = useContext(CustomerInfoContext);
+  
   return (
     <div>
+      {yoga}
       <p>Customer</p>
       <div className="ReservationList">
-        <ReservationList CustomerInfo={CustomerInfo} />
+        <ReservationList info = {info} />
       </div>
     </div>
   );

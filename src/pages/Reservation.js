@@ -18,7 +18,6 @@ export const GetInformation = React.createContext();
 const Reservation = () => {
     const { id } = useParams();
     const stylistList = useContext(StylistStateContext);
-    const {customerCreate} = useContext(StylistDispatchContext);
     const { infoCreate } = useContext(CustomerDispatchContext); 
    
     
@@ -36,9 +35,8 @@ const Reservation = () => {
     }        
     
     const handleSubmit = () => {
-      infoCreate(data, phoneNumber, getDate ,customerName); 
-      customerCreate(data, phoneNumber, getDate ,customerName);      
-      navigate('/Customer');
+      infoCreate(data, phoneNumber, getDate ,customerName);       
+      navigate('/CustomerInfo/Customer');
     }
     
     useEffect(()=> {        
