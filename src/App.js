@@ -49,6 +49,7 @@ const reducer = (state,action) => {
 
 export const StylistStateContext = React.createContext();
 export const StylistDispatchContext = React.createContext();
+export const CustomerStateContext = React.createContext();
 
 const dummyData = [
   {
@@ -113,46 +114,58 @@ function App() {
     });
   };
  
-  const [info, setInfo] = useState();
+  const [info, setInfo] = useState([]);
   const infoId = useRef(0);
 
-  const customerCreate = (data, phoneNumber, getDate, customerName) => {
-    setInfo([data, phoneNumber, getDate, customerName]);
+  const customerCreate = (data, phoneNumber, getDate, customerName) => {    
+    const newInfo = {
+      id: infoId.current,
+      data,
+      phoneNumber,
+      getDate,
+      customerName
+    }
     infoId.current += 1;
-  }
-  console.log(info);
+    setInfo([newInfo, ...info]);    
+  };
+ 
 
 
 
   
   return (
     <StylistStateContext.Provider value={data}>
-      <StylistDispatchContext.Provider 
-        value={{ 
-          onCreate, 
-          onRemove, 
-          onEdit,
-          customerCreate,          
-        }}
-      >
-        <Router>
-          <div className="App">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/Stylist" />
-              <Route path="/New" element={<New />} />
-              <Route path="/Edit/:id" element={<Edit />} />
-              <Route path="/Select" element={<Select />} />
-              <Route path="/Select/Reservation/:id" element={<Reservation />} />
-              <Route path="/Customer" element={<Customer />} />
-              <Route path="/Personalinfo" element={<Personalinfo />} />
-              <Route path="/Time" element={<Time />} />
-              <Route path="/Administrator" element={<Administrator />} />
-            </Routes>
-            {/* <RouteTest /> */}
-          </div>
-        </Router>
-      </StylistDispatchContext.Provider>
+      <CustomerStateContext.Provider value={info}>
+        <StylistDispatchContext.Provider
+          value={{
+            onCreate,
+            onRemove,
+            onEdit,
+            customerCreate,
+          }}
+        >
+          <Router>
+            <div className="App">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/Stylist" />
+                <Route path="/New" element={<New />} />
+                <Route path="/Edit/:id" element={<Edit />} />
+                <Route path="/Select" element={<Select />} />
+                <Route
+                  path="/Select/Reservation/:id"
+                  element={<Reservation />}
+                />
+                <Route path="/Customer" element={<Customer />} />
+                <Route path="/Personalinfo" element={<Personalinfo />} />
+                <Route path="/Time" element={<Time />} />
+                <Route path="/Administrator" element={<Administrator />} />
+              </Routes>
+              {/* <RouteTest /> */}
+            </div>
+          </Router>
+        </StylistDispatchContext.Provider>
+      </CustomerStateContext.Provider>
     </StylistStateContext.Provider>
   );
 }

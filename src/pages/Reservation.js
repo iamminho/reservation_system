@@ -18,15 +18,14 @@ export const GetInformation = React.createContext();
 const Reservation = () => {
     const { id } = useParams();
     const stylistList = useContext(StylistStateContext);
-    const {customerCreate} = useContext(StylistDispatchContext);
-    console.log(customerCreate);
+    const {customerCreate} = useContext(StylistDispatchContext);    
     const navigate = useNavigate();
     
     const [data, setData] = useState();
     const [phoneNumber, setphoneNumber] = useState();
     const [getDate, setDate] = useState();
     const [customerName, setCustomerName] = useState();      
-             
+             console.log(getDate);
     const getPhoneNumber = (number) => {
       setphoneNumber(number);
     }
