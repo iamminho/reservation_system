@@ -9,21 +9,13 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 
-const StylistItem = ({id, author, content, isSelect }) => {
-    const navigate = useNavigate();
-
-    
+const StylistItem = ({id, author, content, isSelect, onRemove}) => {
+  const navigate = useNavigate();
+  
   return (
     <div className="StylistItem">
       <Card>
-        <CardActionArea>
-          {/* <CardMedia
-            component="img"
-            alt="Contemplative Reptile"
-            height="100"
-            image={picture}
-            title="Contemplative Reptile"
-            /> */}
+        <CardActionArea>          
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {author}
@@ -46,14 +38,13 @@ const StylistItem = ({id, author, content, isSelect }) => {
             {(isSelect) ? "예약하기" : "수정하기"}
           </Button>
 
-          <Button size="small" color="primary">
-            Learn More
+          <Button size="small" color="primary" >
+            삭제하기
           </Button>
         </CardActions>
       </Card>
     </div>
-  );
-  
+  );  
 };
 
-export default StylistItem;
+export default React.memo(StylistItem);

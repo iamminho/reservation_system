@@ -1,15 +1,19 @@
 import { useContext } from 'react';
 import { StylistStateContext } from "../App";
+import { StylistDispatchContext } from "../App";
 import { useNavigate } from 'react-router-dom';
 import MyButton from '../components/MyButtons';
 
 import StylistList from '../components/StylistList';
 import { render } from '@testing-library/react';
 
+
 const Home = ({isSelect}) => {  
   const navigate = useNavigate();
   const stylistList = useContext(StylistStateContext);
-
+  const {onRemove} = useContext(StylistDispatchContext);
+  
+  
   
   if(isSelect) {
     return (
@@ -34,7 +38,7 @@ const Home = ({isSelect}) => {
           }}
         />      
         <h1>Home</h1>
-        <StylistList stylistList={stylistList} />
+        <StylistList stylistList={stylistList} onRemove={onRemove}/>
       </div>
     );
   }  

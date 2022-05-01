@@ -1,8 +1,9 @@
-import React, { useReducer, useState, useRef, useEffect } from "react";
+import React, { useContext, useReducer, useState, useRef, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Reservation from './pages/Reservation';
 import ReservationList from './components/ReservationList'
 import Customer from './pages/Customer';
+import {StylistStateContext} from './App';
 
 const reducer = (state,action) => {
     let newState = [];
@@ -28,6 +29,7 @@ const reducer = (state,action) => {
         return state;
     }
     localStorage.setItem("Customer", JSON.stringify(newState));
+    console.log(newState);
     return newState;   
   };
   
@@ -35,7 +37,9 @@ const reducer = (state,action) => {
 export const CustomerInfoContext = React.createContext();
 export const CustomerDispatchContext = React.createContext();
 
+
 const CustomerInfo = () => {
+ const stylistData = useContext(StylistStateContext);
  const [info,dispatch] = useReducer(reducer,[]);
  const infoId = useRef(0);
 
@@ -87,7 +91,7 @@ const CustomerInfo = () => {
         >
           <div>           
             <Routes>
-                <Route path="/Reservation/:id" element={<Reservation />}/>
+                <Route path="/Reservation/:id" element={<Reservation stylistData={stylistData} />}/>
                 <Route path="/Customer" element={<Customer/> }/>                                                                                   
             </Routes>            
           </div>

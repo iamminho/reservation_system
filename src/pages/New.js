@@ -9,9 +9,6 @@ import TextField from "@mui/material/TextField";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import { LineAxisOutlined } from '@mui/icons-material';
 
-//component
-import MyHeader from '../components/MyHeader';
-
 const New = ({isEdit,originData}) => {
   const navigate = useNavigate();
 
@@ -88,7 +85,6 @@ const New = ({isEdit,originData}) => {
   return (
     <div className="Addstylelist">
       
-      <MyHeader headText={isEdit ? "수정" : "입력"} />
 
       
       <div>

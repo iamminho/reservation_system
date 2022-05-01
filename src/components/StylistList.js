@@ -1,12 +1,18 @@
 import StylistItem from './StylistItem';
-const StylistList = ({stylistList, isSelect, getName}) => {
+const StylistList = ({onRemove, stylistList, isSelect, getName}) => {
     
     return (
-        <div>
-            {stylistList.map((it)=>(
-                <StylistItem key={it.id} {...it} isSelect={isSelect} getName={getName}/>
-            ))}
-        </div>
+      <div>
+        {stylistList.map((it) => (
+          <StylistItem
+            key={it.id}
+            {...it}
+            isSelect={isSelect}
+            getName={getName}   
+            onRemove = {onRemove}         
+          />
+        ))}
+      </div>
     );
 };
 

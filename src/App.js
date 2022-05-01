@@ -2,26 +2,14 @@ import "./App.css";
 import React, { useReducer, useState, useRef, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-// import RouteTest from "./components/RouteTest";
-
 //Pages
 import Edit from "./pages/Edit";
 import New from "./pages/New";
 import Select from "./pages/Select";
-import Reservation from "./pages/Reservation"
-import Stylist from "./pages/Stylist";
-import Personalinfo from "./pages/Personalinfo";
-import Time from "./pages/Time";
 import Home from "./pages/Home";
 import Administrator from './pages/Administrator';
-import Customer from './pages/Customer';
 import CustomerInfo from './CustomerInfo';
-
-//Components
-// import MyButton from "./components/MyButtons";
-import MyHeader from "./components/MyHeader";
-import StylistItem from "./components/StylistItem";
-
+import Day from './components/Day';
 const reducer = (state,action) => {
   let newState = [];
   switch(action.type){
@@ -52,8 +40,6 @@ const reducer = (state,action) => {
 export const StylistStateContext = React.createContext();
 export const StylistDispatchContext = React.createContext();
 export const CustomerStateContext = React.createContext();
-
-
 
 function App() {
   const [data,dispatch] = useReducer(reducer,[]);
@@ -95,25 +81,6 @@ function App() {
       },
     });
   };
- 
-  // const [info, setInfo] = useState([]);
-  // const infoId = useRef(0);
-
-  // const customerCreate = (data, phoneNumber, getDate, customerName) => {    
-  //   const newInfo = {
-  //     id: infoId.current,
-  //     data,
-  //     phoneNumber,
-  //     getDate,
-  //     customerName
-  //   }
-  //   infoId.current += 1;
-  //   setInfo([newInfo, ...info]);    
-  // };
- 
-
-
-
   
   return (
     <StylistStateContext.Provider value={data}>
@@ -129,21 +96,13 @@ function App() {
             <div className="App">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/Stylist" />
                 <Route path="/New" element={<New />} />
                 <Route path="/Edit/:id" element={<Edit />} />
-                <Route path="/Select" element={<Select />} />
-                {/* <Route
-                  path="/Reservation/:id"
-                  element={<Reservation />}
-                /> */}
-                {/* <Route path="/Customer" element={<Customer />} /> */}
-                <Route path="/Personalinfo" element={<Personalinfo />} />
-                <Route path="/Time" element={<Time />} />
+                <Route path="/Select" element={<Select />} />                                
                 <Route path="/Administrator" element={<Administrator />} />
                 <Route path="/CustomerInfo/*" element={<CustomerInfo />} />
-              </Routes>
-              {/* <RouteTest /> */}
+                <Route path="/Day" element={<Day />} />
+              </Routes>            
             </div>
           </Router>
         </StylistDispatchContext.Provider>      

@@ -15,18 +15,17 @@ import { ConstructionOutlined } from '@mui/icons-material';
 export const GetInformation = React.createContext();
 
 
-const Reservation = () => {
+const Reservation = ({stylistData}) => {  
     const { id } = useParams();
-    const stylistList = useContext(StylistStateContext);
-    const { infoCreate } = useContext(CustomerDispatchContext); 
-   
+    
+    const { infoCreate } = useContext(CustomerDispatchContext);    
     
     const navigate = useNavigate();
     
     const [data, setData] = useState();
     const [phoneNumber, setphoneNumber] = useState();
     const [getDate, setDate] = useState();
-    const [customerName, setCustomerName] = useState();                   
+    const [customerName, setCustomerName] = useState();               
     const getPhoneNumber = (number) => {
       setphoneNumber(number);
     }
@@ -40,8 +39,8 @@ const Reservation = () => {
     }
     
     useEffect(()=> {        
-        if(stylistList.length >= 1){
-            const targetStylist = stylistList.find(
+        if(stylistData.length >= 1){
+            const targetStylist = stylistData.find(
               (it) => parseInt(it.id) === parseInt(id)
             );
                   
@@ -52,7 +51,7 @@ const Reservation = () => {
                 navigate('/Select', {replace:true})
             }
         }                
-    },[id,stylistList])
+    },[id,stylistData])
     
     const handleChange = (e) => {
       setCustomerName(e.target.value);
